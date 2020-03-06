@@ -1,0 +1,94 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+   - name: install Apache server
+     apt:
+       name: apache2
+       state: latest
+
+   - name: enable and start Apache server
+     service:
+       name: apache2
+       enabled: yes
+       state: started
+
+   - name: create web admin group
+     group:
+       name: web
+       state: present
+
+   - name: create web admin user
+     user:
+       name: webadm
+       comment: "Web Admin"
+       password: 
+       groups: web
+       append: yes
+
+   - name: set content directory group/permissions 
+     file:
+       path: /var/www/html
+       owner: root
+       group: web
+       state: directory
+       mode: u=rwx,g=rwx,o=rx,g+s
+
+   - name: create default page content
+     copy:
+       content: "Welcome to {{ ansible_fqdn}} on {{ ansible_default_ipv4.address }}"
+       dest: /var/www/html/index.html
+       owner: webadm
+       group: web
+       mode: u=rw,g=rw,o=r
+
+- hosts: dbservers
+  become: yes
+  tasks:
+   - name: install MariaDB server
+     apt:
+       name: mariadb-server
+       state: latest
+
+   - name: enable and start MariaDB server
+     service:
+       name: mariadb
+       enabled: yes
+       state: started
+
+- hosts: logservers
+  become: yes
+  tasks:
+   - name: configure rsyslog remote log reception over udp
+     lineinfile:
+       path: /etc/rsyslog.conf
+       line: "{{ item }}"
+       state: present
+     with_items:
+       - '$ModLoad imudp'
+       - '$UDPServerRun 514'
+     notify:
+       - restart rsyslogd
+
+  handlers:
+   - name: restart rsyslogd
+     service:
+       name: rsyslog
+       state: restarted
+
+- hosts: lamp
+  become: yes
+  tasks:
+   - name: configure rsyslog
+     lineinfile:
+       path: /etc/rsyslog.conf
+       line: '*.* @192.168.102.215:514'
+       state: present
+     notify:
+       - restart rsyslogd
+
+  handlers:
+   - name: restart rsyslogd
+     service:
+       name: rsyslog
+       state: restarted
