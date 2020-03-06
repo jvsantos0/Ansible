@@ -4,30 +4,30 @@
 
 1. Inventário Utilizado:
   [localhost]
-  127.0.0.1
+ 127.0.0.1
   
   [webservers]
-  vm1
-  vm2
+ vm1
+ vm2
   
   [dbservers]
-  vm3
+ vm3
   
   [logservers]
-  vm5
+ vm5
 
   [lamp:children]
-  webservers
-  dbservers
+ webservers
+ dbservers
 
 2. Criando registro DNS para as máquinas utilizadas ("vmX")
-  *sudo nano /etc/hosts*
+*sudo nano /etc/hosts*
   
-  Já dentro do arquivo, bastas seguir a lógica do localhost que já vai estar escrito no mesmo.
+Já dentro do arquivo, bastas seguir a lógica do localhost que já vai estar escrito no mesmo.
   
-  127.0.0.1 localhost
-  x.x.x.x vm1
-  x.x.x.x vm2
-  x.x.x.x vm3
-  x.x.x.x vm5
+127.0.0.1 localhost
+x.x.x.x vm1
+x.x.x.x vm2
+x.x.x.x vm3
+x.x.x.x vm5
   
