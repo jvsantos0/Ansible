@@ -30,4 +30,4 @@
 	x.x.x.x vm1\
 	x.x.x.x vm2\
 	x.x.x.x vm3\
-	x.x.x.x vm5\
+	x.x.x.x vm5
