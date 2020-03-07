@@ -4,35 +4,35 @@
 
 ### 1. Inventário Utilizado:
 
-	[localhost]\
+	[localhost]
 	127.0.0.1
   
-	[webservers]\
-	vm1\
+	[webservers]
+	vm1
 	vm2
   
-	[dbservers]\
+	[dbservers]
 	vm3
   
-	[logservers]\
+	[logservers]
 	vm5
 
-	[lamp:children]\
-	webservers\
+	[lamp:children]
+	webservers
 	dbservers
 
-### 2. Criando registro DNS para as máquinas utilizadas ("vmX")\
-	*sudo nano /etc/hosts*
+### 2. Criando registro DNS para as máquinas utilizadas ("vmX")
+	sudo nano /etc/hosts
   
 	Já dentro do arquivo, bastas seguir a lógica do localhost que já vai estar escrito no mesmo.
   
-	127.0.0.1 localhost\
-	x.x.x.x vm1\
-	x.x.x.x vm2\
-	x.x.x.x vm3\
+	127.0.0.1 localhost
+	x.x.x.x vm1
+	x.x.x.x vm2
+	x.x.x.x vm3
 	x.x.x.x vm5
 
-### 3. Testando as máquinas com o comando *ansible all -m ping*
+### 3. Testando as máquinas com o comando ansible all -m ping
 	Antes de tentar o comando é importante que a máquina Ansible já tenha acesso SSH com as outras vms.
 	
 	Ativando o ssh-agent = eval `ssh-agent`
