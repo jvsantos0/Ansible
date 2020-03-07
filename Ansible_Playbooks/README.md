@@ -37,16 +37,18 @@
 	
 	Ativando o ssh-agent = eval `ssh-agent`
 	
-	Adicionando a chave as listas do ssh-agent = ssh-add *caminho do arquivo .pem*
+	Adicionando a chave as listas do ssh-agent = ssh-add *<caminho do arquivo .pem>*
 	
-	Comando para acesso ssh após o ssh-agent cadastrar a chave = ssh ubuntu@vmX *onde está o X basta modificar pelo número da VM de 1-5*
+	Comando para acesso ssh após o ssh-agent cadastrar a chave = ssh ubuntu@vmX (Onde está o X basta modificar pelo número da VM de 1-5)
 	
 	Após a máquina Ansible ter acesso a todas as outras 4 VM's, o comando citado no tópico pode dar erros referente ao python das máquinas alvo. Basta entrar nas máquinas e dar um apt-get update e verificar se o python foi instalado. Caso não tenha sido, basta baixar o pacote do python com o apt-get install python3
 	
 ### 4. Prosseguindo para o Playbook
 	Basta procurar o arquivo myplaybook.yml dentro do repositório e copiar para dentro da máquina ansible.
 	
-	Aplique o comando *ansible-playbook myplaybook.yml*
+	Aplique o comando *<ansible-playbook myplaybook.yml>*
 	
-	No final do arquivo, as máquinas vm1,vm2,vm3,vm5 terão suas cores representadas pela cor *Verde = Nada foi alterado e está OK*, *Amarelo = Alguma configuração foi aplicada pelo playbook durante o comando*
+	No final do arquivo, as máquinas vm1,vm2,vm3,vm5 terão suas cores representadas da seguinte maneira:
+	Verde = Nada foi alterado e está OK
+	Amarelo = Alguma configuração foi aplicada pelo playbook durante o comando
 	
